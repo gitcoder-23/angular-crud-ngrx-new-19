@@ -1,0 +1,16 @@
+// app-routing.module.ts and app.module.ts files are missing in Ionic project
+
+https://stackoverflow.com/questions/75906450/app-routing-module-ts-and-app-module-ts-files-are-missing-in-ionic-project
+
+ng new my-app --no-standalone --routing --ssr=false
+
+
+
+// added
+ng add @angular/material
+ng add @ngrx/store@latest
+ng add @ngrx/effects@latest
+ng add @ngrx/router-store@latest
+ng add @ngrx/store-devtools@latest
+
+
