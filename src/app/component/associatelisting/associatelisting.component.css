@@ -5,3 +5,11 @@
 button{
     margin: 2px;
 }
+
+.mat-mdc-card{
+    background-color: brown;
+}
+
+.mat-mdc-dialog-surface{
+    background-color: #d8efef;
+}
