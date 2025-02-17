@@ -16,7 +16,7 @@ ng add @ngrx/store-devtools@latest
 
 // you tut
 https://youtu.be/wpNV4kJt1S4?si=gNt34c5vWLzazxM4
-10 min
+31:14 min
 
 
 // NGRX flow
