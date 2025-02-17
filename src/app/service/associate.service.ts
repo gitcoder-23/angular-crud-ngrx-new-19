@@ -15,24 +15,24 @@ export class AssociateService {
     return this.http.get<Associates[]>(this.baseUrl);
   }
 
-  GetAllAssociateByCode(code: number) {
+  GetAssociateByCode(code: number) {
     return this.http.get<Associates>(`${this.baseUrl}/${code}`);
   }
 
 
-  deleteAssociateByCode(code: number) {
+  DeleteAssociateByCode(code: number) {
     return this.http.delete(`${this.baseUrl}/${code}`);
   }
 
 
 
 
-  createAssociate(data:Associates) {
+  CreateAssociate(data:Associates) {
     return this.http.put(this.baseUrl, data);
   }
 
 
-  updateAssociate(data:Associates) {
+  UpdateAssociate(data:Associates) {
     return this.http.put(this.baseUrl+'/'+data.id, data);
   }
 }
