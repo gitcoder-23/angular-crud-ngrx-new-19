@@ -13,6 +13,10 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AssociateReducer } from './Store/Associate/Associate.Reducer';
+import { AppEffects } from './Store/Common/App.Effects';
+import { AssociateEffects } from './Store/Associate/Associate.Effects';
+import { AssociateService } from './service/associate.service';
 
 @NgModule({
   declarations: [
@@ -26,12 +30,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    // Below two modules for the ngrx store
+    StoreModule.forRoot({associate: AssociateReducer,}),
+    EffectsModule.forRoot([AssociateEffects, AppEffects]),
+    // StoreRouterConnectingModule.forRoot(),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() ,  connectInZone: true}),
   ],
   providers: [
+    AssociateService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

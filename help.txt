@@ -22,4 +22,17 @@ https://youtu.be/wpNV4kJt1S4?si=gNt34c5vWLzazxM4
 // NGRX flow
 Model => Below
 
-State => Action => Effects => 
+1>Services=> 
+2> State=> 
+3> Action=> 
+4> Effects=> 
+5> Reducer=> 
+6> set Effects & Reducers in app.module.ts
+7> Selector (To fetch the datas and data get)
+8> then call the store in the particular component
+
+
+
+
+
+

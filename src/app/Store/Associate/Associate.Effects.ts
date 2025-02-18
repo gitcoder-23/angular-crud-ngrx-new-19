@@ -7,26 +7,46 @@ import { AssociateService } from "../../service/associate.service";
 
 @Injectable()
 export class AssociateEffects {
-    constructor(private actin$: Actions, private service: AssociateService) {
+    constructor(private action$: Actions, private service: AssociateService) {
+        console.log("AssociateEffects initialized, service instance:", this.service);
 
     }
 
+    // _loadassociate = createEffect(() =>
+    //     this.action$.pipe(
+    //         ofType(loadassociate),
+    //         exhaustMap((action) => {
+    //             return this.service.GetAllAssociate().pipe(
+    //                 map((data) => {
+    //                     return loadassociatesuccess({ list: data })
+    //                 }),
+    //                 catchError((_error) => of(loadassociatefail({ errormessage: _error.message })))
+    //             )
+    //         })
+    //     )
+    // )
+
     _loadassociate = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(loadassociate),
             exhaustMap((action) => {
-                return this.service.GetAllAssociate().pipe(
+                console.log("Effect triggered, calling service GetAllAssociate...");
+                return this.service?.GetAllAssociate().pipe(  // Add optional chaining
                     map((data) => {
-                        return loadassociatesuccess({ list: data })
+                        console.log("Data received from API:", data);
+                        return loadassociatesuccess({ list: data });
                     }),
-                    catchError((_error) => of(loadassociatefail({ errormessage: _error.message })))
-                )
+                    catchError((_error) => {
+                        console.error("API Error:", _error);
+                        return of(loadassociatefail({ errormessage: _error.message }));
+                    })
+                );
             })
         )
-    )
+    );
 
     _getassociate = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(getassociate),
             exhaustMap((action) => {
                 return this.service.GetAssociateByCode(action.id).pipe(
@@ -40,7 +60,7 @@ export class AssociateEffects {
     )
 
     _addassociate = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(addassociate),
             switchMap((action) => {
                 return this.service.CreateAssociate(action.inputdata).pipe(
@@ -54,7 +74,7 @@ export class AssociateEffects {
         )
     )
     _updateassociate = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(updateassociate),
             switchMap((action) => {
                 return this.service.UpdateAssociate(action.inputdata).pipe(
@@ -68,7 +88,7 @@ export class AssociateEffects {
         )
     )
     _deleteassociate = createEffect(() =>
-    this.actin$.pipe(
+    this.action$.pipe(
         ofType(deleteeassociate),
         switchMap((action) => {
             return this.service.DeleteAssociateByCode(action.code).pipe(
